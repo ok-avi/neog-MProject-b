@@ -11,7 +11,7 @@ const SalesAgent = () => {
   });
   const { id } = useParams();
   const { data, loading, error } = useFetch(
-    `http://localhost:3000/api/v1/leads?salesAgent=${id}`
+    `https://neog-m-project-b-backend.vercel.app/api/v1/leads?salesAgent=${id}`
   );
   // console.log(data && data, loading);
   let sortedLeads = [];

@@ -29,7 +29,7 @@ const Status = () => {
   const [searchParams] = useSearchParams();
   const name = searchParams.get("name");
   const { data, loading, error } = useFetch(
-    `http://localhost:3000/api/v1/leads?status=${name}`
+    `https://neog-m-project-b-backend.vercel.app/api/v1/leads?status=${name}`
   );
   // console.log(data&&data)
   //   console.log(searchParams.get("name"),searchParams)

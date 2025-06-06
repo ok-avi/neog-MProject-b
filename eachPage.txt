@@ -1,0 +1,21 @@
+1. Dashboard Screen
+2. Lead Management(details) Screen
+3. Lead List Screen
+4. Add New Lead Screen
+
+
+5. Sales Agent Management Screen
+6. Add New Agent Screen
+7. Reports Screen
+8. Lead Status View
+9. Sales Agent View
+
+
+Frontend (React):
+1.LeadForm
+2.LeadList
+3.LeadDetails
+4.LeadStatus View
+5.SalesAgent View
+6.Report and Visualization
+7.Filtering

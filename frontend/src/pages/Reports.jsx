@@ -41,7 +41,7 @@ function leadsClosedByAgent(data) {
 }
 
 const Reports = () => {
-  const { data, loading, error } = useFetch("http://localhost:3000/api/v1/leads");
+  const { data, loading, error } = useFetch("https://neog-m-project-b-backend.vercel.app/api/v1/leads");
   if (data) {
     // console.log(data)
     // leadsClosedByAgent(data);

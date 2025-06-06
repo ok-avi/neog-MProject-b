@@ -13,7 +13,7 @@ const AgentForm = () => {
         // console.log("empty")
         return
     }
-    fetch("http://localhost:3000/api/v1/agents", {
+    fetch("https://neog-m-project-b-backend.vercel.app/api/v1/agents", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

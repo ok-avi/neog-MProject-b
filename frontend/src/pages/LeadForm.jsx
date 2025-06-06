@@ -3,7 +3,7 @@ import Sidebar from "../components/Sidebar";
 import useFetch from "../useFetch";
 
 function postFormData(leadForm, setAlertMsg) {
-  fetch("http://localhost:3000/api/v1/leads", {
+  fetch("https://neog-m-project-b-backend.vercel.app/api/v1/leads", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -41,7 +41,7 @@ const LeadForm = () => {
     timeToClose: "",
     tags: [],
   });
-  const { data, loading, error } = useFetch("http://localhost:3000/api/v1/agents");
+  const { data, loading, error } = useFetch("https://neog-m-project-b-backend.vercel.app/api/v1/agents");
   function tagHandler(e) {
     const { value } = e.target;
     // setTags((prev) => {

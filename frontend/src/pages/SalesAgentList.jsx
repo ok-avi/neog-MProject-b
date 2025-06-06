@@ -4,7 +4,7 @@ import useFetch from "../useFetch";
 import "../index.css"
 
 const SalesAgentList = () => {
-  const { data, loading, error } = useFetch("http://localhost:3000/api/v1/agents");
+  const { data, loading, error } = useFetch("https://neog-m-project-b-backend.vercel.app/api/v1/agents");
   // console.log(data && data);
   return (
     <>

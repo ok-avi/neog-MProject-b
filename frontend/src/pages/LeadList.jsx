@@ -15,7 +15,7 @@ const LeadList = () => {
   const [filterStatus, setFilterStatus] = useState();
   const [sortByPriority, setSortByPriority] = useState();
   const [sortByTimeToClose, setSortByTimeToClose] = useState();
-  const { data, loading, error } = useFetch("http://localhost:3000/api/v1/leads");
+  const { data, loading, error } = useFetch("https://neog-m-project-b-backend.vercel.app/api/v1/leads");
   // console.log(data && data);
 
   let filteredLeads;

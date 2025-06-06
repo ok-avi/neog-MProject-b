@@ -17,7 +17,7 @@ function updateLead(lead, data, leadId) {
     priority: lead.priority === "" ? data.priority : lead.priority,
   };
 
-  fetch(`http://localhost:3000/api/v1/leads/${leadId}`, {
+  fetch(`https://neog-m-project-b-backend.vercel.app/api/v1/leads/${leadId}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -45,7 +45,7 @@ function updateLead(lead, data, leadId) {
 }
 
 function getComments(leadId, setComments) {
-  fetch(`http://localhost:3000/api/v1/leads/${leadId}/comments`)
+  fetch(`https://neog-m-project-b-backend.vercel.app/api/v1/leads/${leadId}/comments`)
     .then((res) => res.json())
     .then((data) => setComments(data))
     .catch((error) => console.log(error));
@@ -55,7 +55,7 @@ function createNewComment(leadId, newComment) {
   // console.log("worked");
   if (!newComment) return;
   // console.log("not worked");
-  fetch(`http://localhost:3000/api/v1/leads/${leadId}/comments`, {
+  fetch(`https://neog-m-project-b-backend.vercel.app/api/v1/leads/${leadId}/comments`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -86,7 +86,7 @@ const LeadDetails = () => {
   const { id } = useParams();
   const leadId = "682aea83991fbf98d2868884";
   const { data, loading, error } = useFetch(
-    `http://localhost:3000/api/v1/leads/${id}`
+    `https://neog-m-project-b-backend.vercel.app/api/v1/leads/${id}`
   );
   //   console.log(data && data, "data");
   // console.log(lead, "data");
