@@ -14,24 +14,26 @@ const SalesAgent = () => {
   const { data, loading, error } = useFetch(
     `https://neog-m-project-b-backend.vercel.app/api/v1/leads?salesAgent=${id}`
   );
-  // console.log(data && data, loading);
+  console.log(data && data);
   let sortedLeads = [];
-  if (!data) return;
-  sortedLeads = [...data];
+  if (data) {
 
-  if (filter.status) {
-    sortedLeads = sortedLeads.filter((lead) => lead.status === filter.status);
-  }
-  if (filter.priority) {
-    sortedLeads = sortedLeads.filter(
-      (lead) => lead.priority === filter.priority
-    );
-  }
-  if (filter.timeToClose === "latest") {
-    sortedLeads = sortedLeads.sort((a, b) => a.timeToClose - b.timeToClose);
-  } else if (filter.timeToClose === "oldest") {
-    sortedLeads = sortedLeads.sort((a, b) => b.timeToClose - a.timeToClose);
-  }
+    sortedLeads = [...data];
+  
+    if (filter.status) {
+      sortedLeads = sortedLeads.filter((lead) => lead.status === filter.status);
+    }
+    if (filter.priority) {
+      sortedLeads = sortedLeads.filter(
+        (lead) => lead.priority === filter.priority
+      );
+    }
+    if (filter.timeToClose === "latest") {
+      sortedLeads = sortedLeads.sort((a, b) => a.timeToClose - b.timeToClose);
+    } else if (filter.timeToClose === "oldest") {
+      sortedLeads = sortedLeads.sort((a, b) => b.timeToClose - a.timeToClose);
+    }
+  };
 
   return (
     <>
@@ -47,7 +49,7 @@ const SalesAgent = () => {
         </section>
         <section className="col-8 col-lg-9 py-4 px-5">
           {loading&&<Loading />}
-          {data&&data.length>0?<>
+          {data&&(data.length>0?<>
           <section className="my-4">
             <h2><span className="text-danger">{data&&data.length>0 && data[0].salesAgent.name}</span> <span className="text-secondary">&rarr;</span>  Leads</h2>
           </section>
@@ -139,7 +141,7 @@ const SalesAgent = () => {
           
           </>:
           <p className="text-center fs-4 fw-medium text-danger">Sales Agent don't have any leads</p>
-          }
+          )}
           {/* {filter.status}, {filter.priority}, {filter.timeToClose} */}
         </section>
       </main>
