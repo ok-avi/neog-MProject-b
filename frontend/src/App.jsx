@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import useFetch from "./useFetch";
 import { useState } from "react";
+import Loading from "./components/Loading";
 
 const App = () => {
   const [filter, setFilter] = useState();
@@ -24,10 +25,7 @@ const App = () => {
           <Sidebar />
         </section>
         <section className="col-8 col-lg-9">
-          {loading && (
-            <p className="text-info text-medium py-5 text-center display-2">
-              Loading...
-            </p>
+          {loading && ( <Loading />
           )}
           {data && data.length > 0 && (
             <>
@@ -46,86 +44,59 @@ const App = () => {
               </section>
               <section className="py-3 px-4">
                 <h2>Lead Status</h2>
-                <ul className="list-group py-2">
-                  <li className="list-group-item w-lg-50">
-                    <div className="row">
-                      <div className="col-4 text-center">New:</div>
-                      <div className="col-2">
-                        {data.filter((lead) => lead.status === "New").length}
-                      </div>
-                      <div className="col-6">
-                        {data.filter((lead) => lead.status === "New").length > 1
-                          ? "Leads"
-                          : "Lead"}
+                
+                <div className="row">
+                  <div className="col-lg-4 col-sm-6 mb-3">
+                    <div className="card">
+                      <div className="card-body">
+                        <h5 className="card-title">New</h5>
+                        <div className="display-3 fw-normal">
+                          {data.filter((lead) => lead.status === "New").length}
+                        </div>
                       </div>
                     </div>
-                  </li>
-                  <li className="list-group-item w-lg-50">
-                    <div className="row">
-                      <div className="col-4 text-center">Contacted:</div>
-                      <div className="col-2">
-                        {
-                          data.filter((lead) => lead.status === "Contacted")
-                            .length
-                        }
-                      </div>
-                      <div className="col-6 ">
-                        {data.filter((lead) => lead.status === "Contacted")
-                          .length > 1
-                          ? "Leads"
-                          : "Lead"}
+                  </div>
+                  <div className="col-lg-4 col-sm-6 mb-3">
+                    <div className="card">
+                      <div className="card-body">
+                        <h5 className="card-title">Contacted</h5>
+                        <div className="display-3 fw-normal">
+                          {data.filter((lead) => lead.status === "Contacted").length}
+                        </div>
                       </div>
                     </div>
-                  </li>
-                  <li className="list-group-item w-lg-50">
-                    <div className="row">
-                      <div className="col-4 text-center">Qualified:</div>
-                      <div className="col-2">
-                        {
-                          data.filter((lead) => lead.status === "Qualified")
-                            .length
-                        }
-                      </div>
-                      <div className="col-6">
-                        {data.filter((lead) => lead.status === "Qualified")
-                          .length > 1
-                          ? "Leads"
-                          : "Lead"}
+                  </div>
+                  <div className="col-lg-4 col-sm-6 mb-3">
+                    <div className="card">
+                      <div className="card-body">
+                        <h5 className="card-title">Qualified</h5>
+                        <div className="display-3 fw-normal">
+                          {data.filter((lead) => lead.status === "Qualified").length}
+                        </div>
                       </div>
                     </div>
-                  </li>
-                  <li className="list-group-item w-lg-50">
-                    <div className="row">
-                      <div className="col-4 text-center">Proposal Sent:</div>
-                      <div className="col-2">
-                        {
-                          data.filter((lead) => lead.status === "Proposal Sent")
-                            .length
-                        }
-                      </div>
-                      <div className="col-6">
-                        {data.filter((lead) => lead.status === "Proposal Sent")
-                          .length > 1
-                          ? "Leads"
-                          : "Lead"}
+                  </div>
+                  <div className="col-lg-4 col-sm-6 mb-3">
+                    <div className="card">
+                      <div className="card-body">
+                        <h5 className="card-title">Proposal Sent</h5>
+                        <div className="display-3 fw-normal">
+                        {data.filter((lead) => lead.status === "Proposal Sent").length}
+                        </div>
                       </div>
                     </div>
-                  </li>
-                  <li className="list-group-item w-lg-50">
-                    <div className="row">
-                      <div className="col-4 text-center">Closed:</div>
-                      <div className="col-2">
+                  </div>
+                  <div className="col-lg-4 col-sm-6 mb-3">
+                    <div className="card">
+                      <div className="card-body">
+                        <h5 className="card-title">Closed</h5>
+                        <div className="display-3 fw-normal">
                         {data.filter((lead) => lead.status === "Closed").length}
-                      </div>
-                      <div className="col-6">
-                        {data.filter((lead) => lead.status === "Closed")
-                          .length > 1
-                          ? "Leads"
-                          : "Lead"}
+                        </div>
                       </div>
                     </div>
-                  </li>
-                </ul>
+                  </div>
+                </div>
               </section>
               <section className="py-3 px-4">
                 <h2>Quick Filters </h2>
