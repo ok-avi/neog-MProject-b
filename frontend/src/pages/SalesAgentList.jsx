@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import useFetch from "../useFetch";
 import "../index.css"
+import Loading from "../components/Loading";
 
 const SalesAgentList = () => {
   const { data, loading, error } = useFetch("https://neog-m-project-b-backend.vercel.app/api/v1/agents");
@@ -19,7 +20,7 @@ const SalesAgentList = () => {
           <Sidebar />
         </section>
         <section className="col-8 col-lg-9 py-4 px-5">
-          {loading && <div className="text-center display-4">Loading...</div>}
+          {loading && <Loading />}
           {data && data.length > 0 && (
             <>
               <section className="mb-4">

@@ -1,3 +1,4 @@
+import Loading from "../components/Loading";
 import Sidebar from "../components/Sidebar";
 import useFetch from "../useFetch";
 import { Chart as Chartjs } from "chart.js/auto";
@@ -82,9 +83,7 @@ const Reports = () => {
         </section>
         <section className="col-8 col-lg-9">
           {loading && (
-            <p className="text-info text-medium py-5 text-center display-2">
-              Loading...
-            </p>
+            <Loading />
           )}
           {data && data.length > 0 && (
             <>

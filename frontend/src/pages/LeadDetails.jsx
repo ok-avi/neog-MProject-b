@@ -2,6 +2,7 @@ import { useState } from "react";
 import Sidebar from "../components/Sidebar";
 import useFetch from "../useFetch.js";
 import { useParams } from "react-router-dom";
+import Loading from "../components/Loading.jsx";
 
 function updateLead(lead, data, leadId) {
   const obj = {
@@ -106,7 +107,7 @@ const LeadDetails = () => {
   return (
     <>
       <header className="border-bottom border-3 text-center py-3">
-        <h1>Lead Management: {data && data.name}</h1>
+        <h1>Lead  {data && <><span className="text-danger">::</span> {data.name}</> }</h1>
       </header>
       <main className="row ">
         <section
@@ -116,6 +117,8 @@ const LeadDetails = () => {
           <Sidebar />
         </section>
         <section className="col-8 col-lg-9 py-4 px-5">
+          {loading&&<Loading />}
+          {data&&<>
           <section className="mb-3">
             <h2 className="text-center">Lead Details</h2>
           </section>
@@ -359,6 +362,7 @@ const LeadDetails = () => {
               </form>
             </section>
           </section>
+          </>}
         </section>
       </main>
     </>

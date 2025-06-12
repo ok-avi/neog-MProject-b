@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import useFetch from "../useFetch";
 import { useState } from "react";
+import Loading from "../components/Loading";
 
 const SalesAgent = () => {
   const [filter, setFilter] = useState({
@@ -45,7 +46,7 @@ const SalesAgent = () => {
           <Sidebar />
         </section>
         <section className="col-8 col-lg-9 py-4 px-5">
-          {loading&&<p className="text-center fs-4 fw-medium text-info">Loading...</p>}
+          {loading&&<Loading />}
           {data&&data.length>0?<>
           <section className="my-4">
             <h2><span className="text-danger">{data&&data.length>0 && data[0].salesAgent.name}</span> <span className="text-secondary">&rarr;</span>  Leads</h2>

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import useFetch from "../useFetch";
 import { Link } from "react-router-dom";
+import Loading from "../components/Loading";
 
 // function getAllLeads(url,setLeads){
 //   fetch("http://localhost:3000/api/v1/leads")
@@ -91,11 +92,8 @@ const LeadList = () => {
         </section>
         <section className="col-8 col-lg-9 py-4 px-5">
           {loading && (
-            <div
-              style={{ minHeight: "80vh" }}
-              className="col d-flex  justify-content-center text-center display-4"
-            >
-              Loading...
+            <div>
+              <Loading />
             </div>
           )}
           {data && (
