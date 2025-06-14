@@ -11,20 +11,21 @@ function uniqueSalesAgents(data) {
   return uniqueArray;
 }
 // 0 === 0
-// 1 === 0 
+// 1 === 0
 // 2 === 2
-function uniquePriority(data){
-  const unique = data.filter((lead,index,array)=>(
-    index === array.findIndex(l=>l.priority===lead.priority)
-  ))
-  return unique
+function uniquePriority(data) {
+  const unique = data.filter(
+    (lead, index, array) =>
+      index === array.findIndex((l) => l.priority === lead.priority)
+  );
+  return unique;
 }
 
 const Status = () => {
   const [filter, setFilter] = useState({
     agent: "",
     priority: "",
-    timeToClose:""
+    timeToClose: "",
   });
   const [searchParams] = useSearchParams();
   const name = searchParams.get("name");
@@ -48,10 +49,12 @@ const Status = () => {
     );
     // console.log(filteredLead,"priority")
   }
-  if(filter.timeToClose==="latest"){
-    filteredLead = filteredLead.sort((a,b)=>a.timeToClose-b.timeToClose)
-  } else if(filter.timeToClose==="oldest"){
-    filteredLead = filteredLead.sort((a,b)=>a.timeToClose-b.timeToClose).reverse()
+  if (filter.timeToClose === "latest") {
+    filteredLead = filteredLead.sort((a, b) => a.timeToClose - b.timeToClose);
+  } else if (filter.timeToClose === "oldest") {
+    filteredLead = filteredLead
+      .sort((a, b) => a.timeToClose - b.timeToClose)
+      .reverse();
     // console.log(filteredLead,"oldest")
   }
   return (
@@ -60,13 +63,7 @@ const Status = () => {
         <h1>Lead's Status </h1>
       </header>
       <main className="row">
-        <section
-          style={{ height: "" }}
-          className="py-4 col-4 col-lg-3 px-5   border-end  border-3 d-flex flex-column align-items-center"
-        >
-          <Sidebar />
-        </section>
-        <section className="col-8 col-lg-9 py-4 px-5">
+        <section className=" py-4 px-5">
           <section className="mb-3">
             <h2>Lead By Status {}</h2>
           </section>
@@ -112,20 +109,24 @@ const Status = () => {
                         Select Agent
                       </option>
                       {uniqueSalesAgents(data).map((agent) => (
-                        <option value={agent.name}>
-                          {agent.name}
-                        </option>
+                        <option value={agent.name}>{agent.name}</option>
                       ))}
                     </select>
                   </div>
                   <div className="col">
-                    <select className="form-control"
-                      onChange={(e)=>setFilter(prev=>({...prev,priority:e.target.value&&e.target.value}))}
+                    <select
+                      className="form-control"
+                      onChange={(e) =>
+                        setFilter((prev) => ({
+                          ...prev,
+                          priority: e.target.value && e.target.value,
+                        }))
+                      }
                     >
                       <option value="" hidden>
                         Select Priority
                       </option>
-                      {uniquePriority(data).map(lead=>(
+                      {uniquePriority(data).map((lead) => (
                         <option value={lead.priority}>{lead.priority}</option>
                       ))}
                     </select>
@@ -134,12 +135,40 @@ const Status = () => {
                 <div className="row">
                   <div className="col">Sort by Time to Close</div>
                   <div className="col form-check">
-                    <input onChange={(e)=>setFilter(prev=>({...prev,timeToClose:e.target.value}))} value="latest" className="form-check-input" type="radio" name="timeToClose" id="latest" />
-                    <label className="form-label" htmlFor="latest">Latest</label>
+                    <input
+                      onChange={(e) =>
+                        setFilter((prev) => ({
+                          ...prev,
+                          timeToClose: e.target.value,
+                        }))
+                      }
+                      value="latest"
+                      className="form-check-input"
+                      type="radio"
+                      name="timeToClose"
+                      id="latest"
+                    />
+                    <label className="form-label" htmlFor="latest">
+                      Latest
+                    </label>
                   </div>
                   <div className="col form-check">
-                    <input onChange={(e)=>setFilter(prev=>({...prev,timeToClose:e.target.value}))} value="oldest" className="form-check-input" type="radio" name="timeToClose" id="oldest" />
-                    <label className="form-label" htmlFor="oldest">Oldest</label>
+                    <input
+                      onChange={(e) =>
+                        setFilter((prev) => ({
+                          ...prev,
+                          timeToClose: e.target.value,
+                        }))
+                      }
+                      value="oldest"
+                      className="form-check-input"
+                      type="radio"
+                      name="timeToClose"
+                      id="oldest"
+                    />
+                    <label className="form-label" htmlFor="oldest">
+                      Oldest
+                    </label>
                   </div>
                 </div>
               </section>

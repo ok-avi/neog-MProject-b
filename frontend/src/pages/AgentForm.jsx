@@ -9,9 +9,9 @@ const AgentForm = () => {
   const [alertMsg, setAlertMsg] = useState(false);
   function formHandler(e) {
     e.preventDefault();
-    if(!formData.name,!formData.email){
-        // console.log("empty")
-        return
+    if ((!formData.name, !formData.email)) {
+      // console.log("empty")
+      return;
     }
     fetch("https://neog-m-project-b-backend.vercel.app/api/v1/agents", {
       method: "POST",
@@ -38,13 +38,7 @@ const AgentForm = () => {
         <h1>Add New Sales Agent </h1>
       </header>
       <main className="row">
-        <section
-          style={{ height: "" }}
-          className="py-4 col-4 col-lg-3 px-5   border-end  border-3 d-flex flex-column align-items-center"
-        >
-          <Sidebar />
-        </section>
-        <section className="col-8 col-lg-6 py-4 px-5 ">
+        <section className=" py-4 px-5 ">
           <form onSubmit={formHandler}>
             <div className="mb-3">
               <label className="form-label" htmlFor="name">

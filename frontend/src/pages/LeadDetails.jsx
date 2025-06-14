@@ -46,7 +46,9 @@ function updateLead(lead, data, leadId) {
 }
 
 function getComments(leadId, setComments) {
-  fetch(`https://neog-m-project-b-backend.vercel.app/api/v1/leads/${leadId}/comments`)
+  fetch(
+    `https://neog-m-project-b-backend.vercel.app/api/v1/leads/${leadId}/comments`
+  )
     .then((res) => res.json())
     .then((data) => setComments(data))
     .catch((error) => console.log(error));
@@ -56,15 +58,18 @@ function createNewComment(leadId, newComment) {
   // console.log("worked");
   if (!newComment) return;
   // console.log("not worked");
-  fetch(`https://neog-m-project-b-backend.vercel.app/api/v1/leads/${leadId}/comments`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      commentText: newComment,
-    }),
-  })
+  fetch(
+    `https://neog-m-project-b-backend.vercel.app/api/v1/leads/${leadId}/comments`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        commentText: newComment,
+      }),
+    }
+  )
     .then((res) => res.json())
     .then((data) => {
       document.forms["commentForm"].reset();
@@ -107,262 +112,282 @@ const LeadDetails = () => {
   return (
     <>
       <header className="border-bottom border-3 text-center py-3">
-        <h1>Lead  {data && <><span className="text-danger">::</span> {data.name}</> }</h1>
+        <h1>
+          Lead{" "}
+          {data && (
+            <>
+              <span className="text-danger">::</span> {data.name}
+            </>
+          )}
+        </h1>
       </header>
       <main className="row ">
-        <section
-          style={{ height: "" }}
-          className="py-4 col-4 col-lg-3 px-5   border-end  border-3 d-flex flex-column align-items-center "
-        >
-          <Sidebar />
-        </section>
-        <section className="col-8 col-lg-9 py-4 px-5">
-          {loading&&<Loading />}
-          {data&&<>
-          <section className="mb-3">
-            <h2 className="text-center">Lead Details</h2>
-          </section>
-          <section className="mb-3 row mx-0">
-            <ul className="list-group col-lg-6 col-md-12">
-              <li className="list-group-item">
-                <div className="row">
-                  <div className="col-6 col-lg-4 d-flex align-items-center">
-                    <span>Lead Name:</span>
-                  </div>
-                  {/* <div className="col-6 col-lg-5">{data && data.name}</div> */}
-                  <div className="px-0 col-6 col-lg-5 ">
-                    <input
-                      className={` m-0  form-control  ${
-                        disable
-                          ? "bg-transparent border-0"
-                          : " bg-secondary-subtle"
-                      } `}
-                      type="text"
-                      name="status"
-                      defaultValue={data && data.name}
-                      onChange={(e) =>
-                        setLead((prev) => ({ ...prev, name: e.target.value }))
-                      }
-                      disabled={disable}
-                    />
-                  </div>
-                </div>
-              </li>
-              <li className="list-group-item">
-                <div className="row">
-                  <div className="col-6 col-lg-4 d-flex align-items-center">
-                    <span>Sales Agent:</span>
-                  </div>
-                  {/* <div className="col-6 col-lg-5">
+        <section className=" py-4 px-5">
+          {loading && <Loading />}
+          {data && (
+            <>
+              <section className="mb-3">
+                <h2 className="text-center">Lead Details</h2>
+              </section>
+              <section className="mb-3 row mx-0">
+                <ul className="list-group col-lg-6 col-md-12">
+                  <li className="list-group-item">
+                    <div className="row">
+                      <div className="col-6 col-lg-4 d-flex align-items-center">
+                        <span>Lead Name:</span>
+                      </div>
+                      {/* <div className="col-6 col-lg-5">{data && data.name}</div> */}
+                      <div className="px-0 col-6 col-lg-5 ">
+                        <input
+                          className={` m-0  form-control  ${
+                            disable
+                              ? "bg-transparent border-0"
+                              : " bg-secondary-subtle"
+                          } `}
+                          type="text"
+                          name="status"
+                          defaultValue={data && data.name}
+                          onChange={(e) =>
+                            setLead((prev) => ({
+                              ...prev,
+                              name: e.target.value,
+                            }))
+                          }
+                          disabled={disable}
+                        />
+                      </div>
+                    </div>
+                  </li>
+                  <li className="list-group-item">
+                    <div className="row">
+                      <div className="col-6 col-lg-4 d-flex align-items-center">
+                        <span>Sales Agent:</span>
+                      </div>
+                      {/* <div className="col-6 col-lg-5">
                     {data && data.salesAgent.name}
                   </div> */}
-                  <div className="px-0 col-6 col-lg-5 ">
-                    <input
-                      className={` m-0  form-control  ${
-                        disable
-                          ? "bg-transparent border-0"
-                          : " bg-secondary-subtle"
-                      } `}
-                      type="text"
-                      name="status"
-                      defaultValue={data && data.salesAgent.name}
-                      onChange={(e) =>
-                        setLead((prev) => ({
-                          ...prev,
-                          salesAgentName: e.target.value,
-                        }))
-                      }
-                      disabled={disable}
-                    />
-                  </div>
-                </div>
-              </li>
-              <li className="list-group-item">
-                <div className="row">
-                  <div className="col-6 col-lg-4 d-flex align-items-center">
-                    <span>Lead Source:</span>
-                  </div>
-                  {/* <div className="col-6 col-lg-5">{data && data.source}</div> */}
-                  <div className="px-0 col-6 col-lg-5 ">
-                    <select
-                      name=""
-                      id=""
-                      className={` m-0  form-control  ${
-                        disable
-                          ? "bg-transparent border-0"
-                          : " bg-secondary-subtle"
-                      } `}
-                      onChange={(e) =>
-                        setLead((prev) => ({ ...prev, source: e.target.value }))
-                      }
-                      disabled={disable}
-                    >
-                      {data && (
-                        <option value={data.source} selected hidden>
-                          {data.source}
-                        </option>
-                      )}
-                      {/* <option value="Website" >{data&& data.source}</option> */}
-                      <option value="Website">Website</option>
-                      <option value="Referral">Referral</option>
-                      <option value="Cold Call">Cold Call</option>
-                      <option value="Advertisement">Advertisement</option>
-                      <option value="Email">Email</option>
-                      <option value="Other">Other</option>
-                    </select>
-                  </div>
-                </div>
-              </li>
-              <li className="list-group-item">
-                <div className="row">
-                  <div className="col-6 col-lg-4 d-flex align-items-center">
-                    <span>Lead Status:</span>
-                  </div>
-                  {/* <div className="col-6 col-lg-5">{data && data.status}</div> */}
-                  <div className="px-0 col-6 col-lg-5 ">
-                    <select
-                      className={` m-0  form-control  ${
-                        disable
-                          ? "bg-transparent border-0"
-                          : " bg-secondary-subtle"
-                      } `}
-                      onChange={(e) =>
-                        setLead((prev) => ({ ...prev, status: e.target.value }))
-                      }
-                      disabled={disable}
-                    >
-                      {data && (
-                        <option value={data.source} selected hidden>
-                          {data.status}
-                        </option>
-                      )}
-                      <option value="New">New</option>
-                      <option value="Qualified">Qualified</option>
-                      <option value="Proposal Sent">Proposal Sent</option>
-                      <option value="Closed">Closed</option>
-                    </select>
-                  </div>
-                </div>
-              </li>
-              <li className="list-group-item">
-                <div className="row">
-                  <div className="col-6 col-lg-4 d-flex align-items-center">
-                    <span>Priority:</span>
-                  </div>
-                  <div className="px-0 col-6 col-lg-5 ">
-                    {/* {data && data.priority} */}
-
-                    <select
-                      id=""
-                      className={` m-0  form-control  ${
-                        disable
-                          ? "bg-transparent border-0"
-                          : " bg-secondary-subtle"
-                      } `}
-                      onChange={(e) =>
-                        setLead((prev) => ({
-                          ...prev,
-                          priority: e.target.value,
-                        }))
-                      }
-                      disabled={disable}
-                    >
-                      {data && (
-                        <option value={data.priority} selected hidden>
-                          {data.priority}
-                        </option>
-                      )}
-                      <option value="High">High</option>
-                      <option value="Medium">Medium</option>
-                      <option value="Low">Low</option>
-                    </select>
-                  </div>
-                </div>
-              </li>
-              <li className="list-group-item">
-                <div className="row">
-                  <div className="col-6 col-lg-4 d-flex align-items-center">
-                    <span>Time to Close:</span>
-                  </div>
-                  <div className="px-0 col-6 col-lg-5 d-flex align-items-center">
-                    {/* {data && data.timeToClose}  */}
-                    <input
-                      style={{ width: `${disable ? "70px" : "100%"}` }}
-                      className={` m-0  form-control  ${
-                        disable
-                          ? "bg-transparent border-0"
-                          : " bg-secondary-subtle"
-                      } `}
-                      type="number"
-                      name="timeToClose"
-                      defaultValue={data && data.timeToClose}
-                      onChange={(e) => {
-                        const { value } = e.target;
-                        setLead((prev) => ({
-                          ...prev,
-                          timeToClose: Number(value) === 0 ? 1 : value,
-                        }));
-                      }}
-                      disabled={disable}
-                    />{" "}
-                    {disable && <span>Days</span>}
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </section>
-          <section className="mb-3">
-            <button
-              onClick={updateLeadHandler}
-              type="button"
-              className="px-4 btn btn-danger"
-            >
-              {disable ? "Edit Lead Details" : "Save"}
-            </button>
-          </section>
-          <section className="mb-3">
-            {comments && comments.length>0&& (
-              <>
-                <h2 className="text-center">Comments </h2>
-
-                <section className="mb-2">
-                  {comments &&
-                    comments.map((comment) => (
-                      <div className="my-2">
-                        <div>
-                          <span className="fs-5">{comment.author.name}</span>
-                          <span className="small mx-2">
-                            {comment &&
-                              new Date(
-                                comment.createdAt
-                              ).toLocaleDateString()}{" "}
-                          </span>
-                          <span className="small">
-                            {" "}
-                            {comment &&
-                              new Date(comment.createdAt).toLocaleTimeString()}
-                          </span>
-                        </div>
-                        <div className="">{comment.commentText}</div>
+                      <div className="px-0 col-6 col-lg-5 ">
+                        <input
+                          className={` m-0  form-control  ${
+                            disable
+                              ? "bg-transparent border-0"
+                              : " bg-secondary-subtle"
+                          } `}
+                          type="text"
+                          name="status"
+                          defaultValue={data && data.salesAgent.name}
+                          onChange={(e) =>
+                            setLead((prev) => ({
+                              ...prev,
+                              salesAgentName: e.target.value,
+                            }))
+                          }
+                          disabled={disable}
+                        />
                       </div>
-                    ))}
+                    </div>
+                  </li>
+                  <li className="list-group-item">
+                    <div className="row">
+                      <div className="col-6 col-lg-4 d-flex align-items-center">
+                        <span>Lead Source:</span>
+                      </div>
+                      {/* <div className="col-6 col-lg-5">{data && data.source}</div> */}
+                      <div className="px-0 col-6 col-lg-5 ">
+                        <select
+                          name=""
+                          id=""
+                          className={` m-0  form-control  ${
+                            disable
+                              ? "bg-transparent border-0"
+                              : " bg-secondary-subtle"
+                          } `}
+                          onChange={(e) =>
+                            setLead((prev) => ({
+                              ...prev,
+                              source: e.target.value,
+                            }))
+                          }
+                          disabled={disable}
+                        >
+                          {data && (
+                            <option value={data.source} selected hidden>
+                              {data.source}
+                            </option>
+                          )}
+                          {/* <option value="Website" >{data&& data.source}</option> */}
+                          <option value="Website">Website</option>
+                          <option value="Referral">Referral</option>
+                          <option value="Cold Call">Cold Call</option>
+                          <option value="Advertisement">Advertisement</option>
+                          <option value="Email">Email</option>
+                          <option value="Other">Other</option>
+                        </select>
+                      </div>
+                    </div>
+                  </li>
+                  <li className="list-group-item">
+                    <div className="row">
+                      <div className="col-6 col-lg-4 d-flex align-items-center">
+                        <span>Lead Status:</span>
+                      </div>
+                      {/* <div className="col-6 col-lg-5">{data && data.status}</div> */}
+                      <div className="px-0 col-6 col-lg-5 ">
+                        <select
+                          className={` m-0  form-control  ${
+                            disable
+                              ? "bg-transparent border-0"
+                              : " bg-secondary-subtle"
+                          } `}
+                          onChange={(e) =>
+                            setLead((prev) => ({
+                              ...prev,
+                              status: e.target.value,
+                            }))
+                          }
+                          disabled={disable}
+                        >
+                          {data && (
+                            <option value={data.source} selected hidden>
+                              {data.status}
+                            </option>
+                          )}
+                          <option value="New">New</option>
+                          <option value="Qualified">Qualified</option>
+                          <option value="Proposal Sent">Proposal Sent</option>
+                          <option value="Closed">Closed</option>
+                        </select>
+                      </div>
+                    </div>
+                  </li>
+                  <li className="list-group-item">
+                    <div className="row">
+                      <div className="col-6 col-lg-4 d-flex align-items-center">
+                        <span>Priority:</span>
+                      </div>
+                      <div className="px-0 col-6 col-lg-5 ">
+                        {/* {data && data.priority} */}
+
+                        <select
+                          id=""
+                          className={` m-0  form-control  ${
+                            disable
+                              ? "bg-transparent border-0"
+                              : " bg-secondary-subtle"
+                          } `}
+                          onChange={(e) =>
+                            setLead((prev) => ({
+                              ...prev,
+                              priority: e.target.value,
+                            }))
+                          }
+                          disabled={disable}
+                        >
+                          {data && (
+                            <option value={data.priority} selected hidden>
+                              {data.priority}
+                            </option>
+                          )}
+                          <option value="High">High</option>
+                          <option value="Medium">Medium</option>
+                          <option value="Low">Low</option>
+                        </select>
+                      </div>
+                    </div>
+                  </li>
+                  <li className="list-group-item">
+                    <div className="row">
+                      <div className="col-6 col-lg-4 d-flex align-items-center">
+                        <span>Time to Close:</span>
+                      </div>
+                      <div className="px-0 col-6 col-lg-5 d-flex align-items-center">
+                        {/* {data && data.timeToClose}  */}
+                        <input
+                          style={{ width: `${disable ? "70px" : "100%"}` }}
+                          className={` m-0  form-control  ${
+                            disable
+                              ? "bg-transparent border-0"
+                              : " bg-secondary-subtle"
+                          } `}
+                          type="number"
+                          name="timeToClose"
+                          defaultValue={data && data.timeToClose}
+                          onChange={(e) => {
+                            const { value } = e.target;
+                            setLead((prev) => ({
+                              ...prev,
+                              timeToClose: Number(value) === 0 ? 1 : value,
+                            }));
+                          }}
+                          disabled={disable}
+                        />{" "}
+                        {disable && <span>Days</span>}
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </section>
+              <section className="mb-3">
+                <button
+                  onClick={updateLeadHandler}
+                  type="button"
+                  className="px-4 btn btn-danger"
+                >
+                  {disable ? "Edit Lead Details" : "Save"}
+                </button>
+              </section>
+              <section className="mb-3">
+                {comments && comments.length > 0 && (
+                  <>
+                    <h2 className="text-center">Comments </h2>
+
+                    <section className="mb-2">
+                      {comments &&
+                        comments.map((comment) => (
+                          <div className="my-2">
+                            <div>
+                              <span className="fs-5">
+                                {comment.author.name}
+                              </span>
+                              <span className="small mx-2">
+                                {comment &&
+                                  new Date(
+                                    comment.createdAt
+                                  ).toLocaleDateString()}{" "}
+                              </span>
+                              <span className="small">
+                                {" "}
+                                {comment &&
+                                  new Date(
+                                    comment.createdAt
+                                  ).toLocaleTimeString()}
+                              </span>
+                            </div>
+                            <div className="">{comment.commentText}</div>
+                          </div>
+                        ))}
+                    </section>
+                  </>
+                )}
+                <section>
+                  <h2 className="text-center">Create New Comment</h2>
+                  <form
+                    className="col-lg-6 col-12 "
+                    onSubmit={submitFormHandler}
+                    name="commentForm"
+                  >
+                    <input
+                      onChange={(e) => setNewComment(e.target.value)}
+                      type="text"
+                      className="form-control"
+                      placeholder="Write a comment..."
+                    />
+                    <button className="btn btn-info mt-3">Submit</button>
+                  </form>
                 </section>
-              </>
-            )}
-            <section>
-              <h2 className="text-center">Create New Comment</h2>
-              <form className="col-lg-6 col-12 " onSubmit={submitFormHandler} name="commentForm">
-                <input
-                  onChange={(e) => setNewComment(e.target.value)}
-                  type="text"
-                  className="form-control"
-                  placeholder="Write a comment..."
-                />
-                <button className="btn btn-info mt-3">Submit</button>
-              </form>
-            </section>
-          </section>
-          </>}
+              </section>
+            </>
+          )}
         </section>
       </main>
     </>
