@@ -16,6 +16,7 @@ const LeadList = () => {
   const [filterStatus, setFilterStatus] = useState();
   const [sortByPriority, setSortByPriority] = useState();
   const [sortByTimeToClose, setSortByTimeToClose] = useState();
+  const [leadView, setLeadView] = useState("card");
   const { data, loading, error } = useFetch(
     "https://neog-m-project-b-backend.vercel.app/api/v1/leads"
   );
@@ -78,6 +79,7 @@ const LeadList = () => {
     setSortByTimeToClose(value);
   }
   // console.log(loading && loading);
+  function leadViewHandler() {}
   return (
     <>
       <header className="border-bottom border-3 text-center py-3">
@@ -95,30 +97,168 @@ const LeadList = () => {
               <section className="mb-3">
                 <h2 className="text-center">Overview</h2>
               </section>
-              <section className="mb-4">
-                <div className="row mb-2">
-                  <div className="col fw-medium ">Lead </div>
-                  <div className="col fw-medium ">Status</div>
-                  <div className="col fw-medium ">Sales agent </div>
-                </div>
-                {data &&
-                  data.length &&
-                  filteredLeads.map((lead) => (
-                    <div className="row mb-2">
-                      <div className="col">{lead.name}</div>
-                      <div className="col">
-                        <Link
-                          to={`/status?name=${lead.status}`}
-                          className="nav-link d-inline link-hover"
-                        >
-                          {lead.status}
-                        </Link>
+
+              {leadView === "list" && (
+                <section className="mb-4">
+                  <div className="row mb-2">
+                    <div className="col fw-medium ">Lead </div>
+                    <div className="col fw-medium ">Status</div>
+                    <div className="col fw-medium ">Sales agent </div>
+                  </div>
+                  {data &&
+                    data.length &&
+                    filteredLeads.map((lead) => (
+                      <div className="row mb-2">
+                        <div className="col">{lead.name}</div>
+                        <div className="col">
+                          <Link
+                            to={`/status?name=${lead.status}`}
+                            className="nav-link d-inline link-hover"
+                          >
+                            {lead.status}
+                          </Link>
+                        </div>
+                        <div className="col">{lead.salesAgent.name}</div>
                       </div>
-                      {/* <div className="col">{lead.priority}</div> */}
-                      <div className="col">{lead.salesAgent.name}</div>
+                    ))}
+                </section>
+              )}
+              {leadView === "card" && (
+                <section className="mb-4">
+                  <div className="row ">
+                    <div className="col-sm-12 col-md-6 col-lg-3 mb-3">
+                      <ul className="list-group">
+                        <li className="list-group-item list-group-item-action  list-group-item-secondary">
+                          <div className="d-flex justify-content-between">
+                            <span>New</span>
+                            <span>
+                              {
+                                filteredLeads.filter(
+                                  (lead) => lead.status === "New"
+                                ).length
+                              }
+                            </span>
+                          </div>
+                        </li>
+                      </ul>
+                      {data.length > 0 &&
+                        filteredLeads
+                          .filter((lead) => lead.status === "New")
+                          .map((lead) => (
+                            <div className="card">
+                              <div className="card-body">
+                                <div className="card-text">{lead.name}</div>
+                              </div>
+                            </div>
+                          ))}
                     </div>
-                  ))}
-              </section>
+                    <div className="col-sm-12 col-md-6 col-lg-3 mb-3">
+                      <ul className="list-group">
+                        <li className="list-group-item list-group-item-action  list-group-item-secondary">
+                          <div className="d-flex justify-content-between">
+                            <span>Contacted</span>
+                            <span>
+                              {
+                                filteredLeads.filter(
+                                  (lead) => lead.status === "Contacted"
+                                ).length
+                              }
+                            </span>
+                          </div>
+                        </li>
+                      </ul>
+                      {data.length > 0 &&
+                        filteredLeads
+                          .filter((lead) => lead.status === "Contacted")
+                          .map((lead) => (
+                            <div className="card">
+                              <div className="card-body">
+                                <div className="card-text">{lead.name}</div>
+                              </div>
+                            </div>
+                          ))}
+                    </div>
+                    <div className="col-sm-12 col-md-6 col-lg-3 mb-3">
+                      <ul className="list-group">
+                        <li className="list-group-item list-group-item-action  list-group-item-secondary">
+                          <div className="d-flex justify-content-between">
+                            <span>Qualifed</span>
+                            <span>
+                              {
+                                filteredLeads.filter(
+                                  (lead) => lead.status === "Qualified"
+                                ).length
+                              }
+                            </span>
+                          </div>
+                        </li>
+                      </ul>
+                      {data.length > 0 &&
+                        filteredLeads
+                          .filter((lead) => lead.status === "Qualified")
+                          .map((lead) => (
+                            <div className="card">
+                              <div className="card-body">
+                                <div className="card-text">{lead.name}</div>
+                              </div>
+                            </div>
+                          ))}
+                    </div>
+                    <div className="col-sm-12 col-md-6 col-lg-3 mb-3">
+                      <ul className="list-group">
+                        <li className="list-group-item list-group-item-action  list-group-item-secondary">
+                          <div className="d-flex justify-content-between">
+                            <span>Proposal Sent</span>
+                            <span>
+                              {
+                                filteredLeads.filter(
+                                  (lead) => lead.status === "Proposal Sent"
+                                ).length
+                              }
+                            </span>
+                          </div>
+                        </li>
+                      </ul>
+                      {data.length > 0 &&
+                        filteredLeads
+                          .filter((lead) => lead.status === "Proposal Sent")
+                          .map((lead) => (
+                            <div className="card">
+                              <div className="card-body">
+                                <div className="card-text">{lead.name}</div>
+                              </div>
+                            </div>
+                          ))}
+                    </div>
+                    <div className="col-sm-12 col-md-6 col-lg-3 mb-3">
+                      <ul className="list-group">
+                        <li className="list-group-item list-group-item-action  list-group-item-danger">
+                          <div className="d-flex justify-content-between">
+                            <span>Closed</span>
+                            <span>
+                              {
+                                filteredLeads.filter(
+                                  (lead) => lead.status === "Closed"
+                                ).length
+                              }
+                            </span>
+                          </div>
+                        </li>
+                      </ul>
+                      {data.length > 0 &&
+                        filteredLeads
+                          .filter((lead) => lead.status === "Closed")
+                          .map((lead) => (
+                            <div className="card">
+                              <div className="card-body">
+                                <div className="card-text">{lead.name}</div>
+                              </div>
+                            </div>
+                          ))}
+                    </div>
+                  </div>
+                </section>
+              )}
               <section className="mb-3">
                 <div className="row mb-3">
                   <div className="col">Filter by status</div>
