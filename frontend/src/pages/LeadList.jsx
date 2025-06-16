@@ -98,6 +98,42 @@ const LeadList = () => {
                 <h2 className="text-center">Overview</h2>
               </section>
 
+              <section className="mb-3">
+                <button
+                  onClick={() => setLeadView("list")}
+                  className={`border rounded-0 ${
+                    leadView === "card" && "bg-white"
+                  }`}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="30px"
+                    width="30px"
+                    viewBox="0 -960 960 960"
+                    fill="black"
+                  >
+                    <path d="M140-220v-45.39h680V-220H140Zm0-158.54v-45.38h680v45.38H140Zm0-157.54v-45.38h680v45.38H140Zm0-158.53V-740h680v45.39H140Z" />
+                  </svg>
+                </button>
+                <button
+                  onClick={() => setLeadView("card")}
+                  className={`border rounded-0 ${
+                    leadView === "list" && "bg-white"
+                  }`}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="30px"
+                    width="30px"
+                    viewBox="0 -960 960 960"
+                    fill="black"
+                    transform="rotate(180)"
+                  >
+                    <path d="M150.77-190.77h199.31v-338.46H150.77v338.46Zm230.08 0h198.3v-578.46h-198.3v578.46Zm229.07 0h199.31v-258.46H609.92v258.46ZM120-160v-400h230.08v-240h259.84v320H840v320H120Z" />
+                  </svg>
+                </button>
+              </section>
+
               {leadView === "list" && (
                 <section className="mb-4">
                   <div className="row mb-2">
