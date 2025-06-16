@@ -21,7 +21,7 @@ const SalesAgentList = () => {
             <>
               <section className="mb-4 d-md-flex align-items-center justify-content-between">
                 <h2 className="">Sales Agent List</h2>
-                <section >
+                <section>
                   <Link
                     to="/sales-agent/form"
                     className="btn btn-outline-danger px-4"
@@ -32,22 +32,24 @@ const SalesAgentList = () => {
               </section>
               <section className="mb-4">
                 <div className="row">
-                  <div className="col fw-medium text-secondary">Agent name</div>
-                  <div className="col fw-medium text-secondary">Email</div>
-                </div>
-                {data.map((agent) => (
-                  <div className="row" key={agent._id}>
-                    <div className="col">
-                      <Link
-                        to={`/sales-agent/${agent._id}`}
-                        className="nav-link link-hover  d-inline"
-                      >
-                        {agent.name}
-                      </Link>
+                  {data.map((agent) => (
+                    <div
+                      key={agent._id}
+                      className="col-lg-4 col-md-4 col mb-3"
+                      style={{ minWidth: "200px" }}
+                    >
+                      <div className="card ">
+                        <Link
+                          to={`/sales-agent/${agent._id}`}
+                          className="card-body nav-link"
+                        >
+                          <h4 className="card-title">{agent.name}</h4>
+                          <div className="card-text">{agent.email}</div>
+                        </Link>
+                      </div>
                     </div>
-                    <div className="col">{agent.email}</div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </section>
             </>
           )}
