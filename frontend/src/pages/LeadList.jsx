@@ -97,41 +97,154 @@ const LeadList = () => {
               <section className="mb-3">
                 <h2 className="text-center">Overview</h2>
               </section>
-
+{/*               
               <section className="mb-3">
-                <button
-                  onClick={() => setLeadView("list")}
-                  className={`border rounded-0 ${
-                    leadView === "card" && "bg-white"
-                  }`}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    height="30px"
-                    width="30px"
-                    viewBox="0 -960 960 960"
-                    fill="black"
+                <div>
+                  <div className="row mb-3">
+                    <div className="col ">Sort by Priority</div>
+                    <div className="col form-check">
+                      <input
+                        type="radio"
+                        className="form-check-input"
+                        name="sortByPriority"
+                        id="lowToHigh"
+                        value="lowToHigh"
+                        onChange={sortByPriorityHandler}
+                      />
+                      <label
+                        htmlFor="lowToHigh"
+                        className="form-check-label border-bottom border-2"
+                      >
+                        Low to High
+                      </label>
+                    </div>
+                    <div className="col form-check">
+                      <input
+                        type="radio"
+                        className="form-check-input"
+                        name="sortByPriority"
+                        id="highToLow"
+                        value="highToLow"
+                        onChange={sortByPriorityHandler}
+                      />
+                      <label
+                        htmlFor="highToLow"
+                        className="form-check-label border-bottom border-2"
+                      >
+                        High to Low
+                      </label>
+                    </div>
+                  </div>
+                  <div className="row mb-3">
+                    <div className="col ">Sort by Time to Close</div>
+                    <div className="col form-check">
+                      <input
+                        type="radio"
+                        className="form-check-input"
+                        name="sortByTimeToClose"
+                        id="latest"
+                        value="latest"
+                        onChange={sortByTimeToCloseHandler}
+                      />
+                      <label
+                        htmlFor="latest"
+                        className="form-check-label border-bottom border-2"
+                      >
+                        Latest
+                      </label>
+                    </div>
+                    <div className="col form-check">
+                      <input
+                        type="radio"
+                        className="form-check-input"
+                        name="sortByTimeToClose"
+                        id="oldest"
+                        value="oldest"
+                        onChange={sortByTimeToCloseHandler}
+                      />
+                      <label
+                        htmlFor="oldest"
+                        className="form-check-label border-bottom border-2"
+                      >
+                        Oldest
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </section> */}
+
+              <section className="mb-3 row">
+                <div className="col mb-2">
+                  <button
+                    onClick={() => setLeadView("list")}
+                    className={`border rounded-0 ${
+                      leadView === "card" && "bg-white"
+                    }`}
                   >
-                    <path d="M140-220v-45.39h680V-220H140Zm0-158.54v-45.38h680v45.38H140Zm0-157.54v-45.38h680v45.38H140Zm0-158.53V-740h680v45.39H140Z" />
-                  </svg>
-                </button>
-                <button
-                  onClick={() => setLeadView("card")}
-                  className={`border rounded-0 ${
-                    leadView === "list" && "bg-white"
-                  }`}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    height="30px"
-                    width="30px"
-                    viewBox="0 -960 960 960"
-                    fill="black"
-                    transform="rotate(180)"
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      height="30px"
+                      width="30px"
+                      viewBox="0 -960 960 960"
+                      fill="black"
+                    >
+                      <path d="M140-220v-45.39h680V-220H140Zm0-158.54v-45.38h680v45.38H140Zm0-157.54v-45.38h680v45.38H140Zm0-158.53V-740h680v45.39H140Z" />
+                    </svg>
+                  </button>
+                  <button
+                    onClick={() => setLeadView("card")}
+                    className={`border rounded-0 ${
+                      leadView === "list" && "bg-white"
+                    }`}
                   >
-                    <path d="M150.77-190.77h199.31v-338.46H150.77v338.46Zm230.08 0h198.3v-578.46h-198.3v578.46Zm229.07 0h199.31v-258.46H609.92v258.46ZM120-160v-400h230.08v-240h259.84v320H840v320H120Z" />
-                  </svg>
-                </button>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      height="30px"
+                      width="30px"
+                      viewBox="0 -960 960 960"
+                      fill="black"
+                      transform="rotate(180)"
+                    >
+                      <path d="M150.77-190.77h199.31v-338.46H150.77v338.46Zm230.08 0h198.3v-578.46h-198.3v578.46Zm229.07 0h199.31v-258.46H609.92v258.46ZM120-160v-400h230.08v-240h259.84v320H840v320H120Z" />
+                    </svg>
+                  </button>
+                </div>
+                <div className="col-lg col-sm-12 row">
+
+                <div className="mb-2 col-lg col-md-6 col-sm-12 ">
+                  <select
+                    className="  form-select"
+                    onChange={(e)=>setSortByTimeToClose(e.target.value)}
+                  >
+                    <option value="" >Sort by Time</option>
+                    <option value="latest">latest</option>
+                    <option value="oldest">oldest</option>
+                  </select>
+                </div>
+                <div className="mb-2 col-lg col-md-6 col-sm-12 ">
+                  <select
+                    className="  form-select"
+                    onChange={sortByPriorityHandler}
+                  >
+                    <option value="" >Sort by Priority</option>
+                    <option value="lowToHigh">lowToHigh</option>
+                    <option value="highToLow">highToLow</option>
+                  </select>
+                </div>
+                <div className="mb-2 col-lg col-md-6 col-sm-12 ">
+                  <select
+                    className="  form-select"
+                    onChange={(e) => setFilterStatus(e.target.value)}
+                  >
+                    <option value="all">All Status</option>
+                    <option value="New">New</option>
+                    <option value="Contacted">Contacted</option>
+                    <option value="Qualified">Qualified</option>
+                    <option value="Proposal Sent">Proposal Sent</option>
+                    <option value="Closed">Closed</option>
+                  </select>
+                </div>
+                </div>
               </section>
 
               {leadView === "list" && (
@@ -295,95 +408,7 @@ const LeadList = () => {
                   </div>
                 </section>
               )}
-              <section className="mb-3">
-                <div className="row mb-3">
-                  <div className="col">Filter by status</div>
-                  <div className="col">
-                    <select
-                      className="w-50  form-select"
-                      onChange={(e) => setFilterStatus(e.target.value)}
-                    >
-                      <option value="all">All Status</option>
-                      <option value="New">New</option>
-                      <option value="Contacted">Contacted</option>
-                      <option value="Qualified">Qualified</option>
-                      <option value="Proposal Sent">Proposal Sent</option>
-                      <option value="Closed">Closed</option>
-                    </select>
-                  </div>
-                  {/* <div className="col"></div> */}
-                </div>
-                <div className="row mb-3">
-                  <div className="col ">Sort by Priority</div>
-                  <div className="col form-check">
-                    <input
-                      type="radio"
-                      className="form-check-input"
-                      name="sortByPriority"
-                      id="lowToHigh"
-                      value="lowToHigh"
-                      onChange={sortByPriorityHandler}
-                    />
-                    <label
-                      htmlFor="lowToHigh"
-                      className="form-check-label border-bottom border-2"
-                    >
-                      Low to High
-                    </label>
-                  </div>
-                  <div className="col form-check">
-                    <input
-                      type="radio"
-                      className="form-check-input"
-                      name="sortByPriority"
-                      id="highToLow"
-                      value="highToLow"
-                      onChange={sortByPriorityHandler}
-                    />
-                    <label
-                      htmlFor="highToLow"
-                      className="form-check-label border-bottom border-2"
-                    >
-                      High to Low
-                    </label>
-                  </div>
-                </div>
-                <div className="row mb-3">
-                  <div className="col ">Sort by Time to Close</div>
-                  <div className="col form-check">
-                    <input
-                      type="radio"
-                      className="form-check-input"
-                      name="sortByTimeToClose"
-                      id="latest"
-                      value="latest"
-                      onChange={sortByTimeToCloseHandler}
-                    />
-                    <label
-                      htmlFor="latest"
-                      className="form-check-label border-bottom border-2"
-                    >
-                      Latest
-                    </label>
-                  </div>
-                  <div className="col form-check">
-                    <input
-                      type="radio"
-                      className="form-check-input"
-                      name="sortByTimeToClose"
-                      id="oldest"
-                      value="oldest"
-                      onChange={sortByTimeToCloseHandler}
-                    />
-                    <label
-                      htmlFor="oldest"
-                      className="form-check-label border-bottom border-2"
-                    >
-                      Oldest
-                    </label>
-                  </div>
-                </div>
-              </section>
+
               <section className="my-5">
                 <Link to="/lead/form" className="btn btn-outline-danger px-5">
                   Create new lead
