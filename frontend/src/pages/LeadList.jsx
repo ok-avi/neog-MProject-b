@@ -94,8 +94,16 @@ const LeadList = () => {
           )}
           {data && (
             <>
-              <section className="mb-3">
-                <h2 className="text-center">Overview</h2>
+              <section className="mb-3 row">
+                <h2 className=" col">Overview</h2>
+                <div className="col-auto">
+                  <Link
+                    to="/lead/form"
+                    className="btn btn-outline-danger px-4 "
+                  >
+                    Create lead
+                  </Link>
+                </div>
               </section>
               {/*               
               <section className="mb-3">
@@ -419,11 +427,7 @@ const LeadList = () => {
                 </section>
               )}
 
-              <section className="my-5">
-                <Link to="/lead/form" className="btn btn-outline-danger px-5">
-                  Create new lead
-                </Link>
-              </section>
+              <section className="my-5"></section>
             </>
           )}
         </section>
