@@ -97,7 +97,7 @@ const LeadList = () => {
               <section className="mb-3">
                 <h2 className="text-center">Overview</h2>
               </section>
-{/*               
+              {/*               
               <section className="mb-3">
                 <div>
                   <div className="row mb-3">
@@ -210,66 +210,76 @@ const LeadList = () => {
                   </button>
                 </div>
                 <div className="col-lg col-sm-12 row">
-
-                <div className="mb-2 col-lg col-md-6 col-sm-12 ">
-                  <select
-                    className="  form-select"
-                    onChange={(e)=>setSortByTimeToClose(e.target.value)}
-                  >
-                    <option value="" >Sort by Time</option>
-                    <option value="latest">latest</option>
-                    <option value="oldest">oldest</option>
-                  </select>
-                </div>
-                <div className="mb-2 col-lg col-md-6 col-sm-12 ">
-                  <select
-                    className="  form-select"
-                    onChange={sortByPriorityHandler}
-                  >
-                    <option value="" >Sort by Priority</option>
-                    <option value="lowToHigh">lowToHigh</option>
-                    <option value="highToLow">highToLow</option>
-                  </select>
-                </div>
-                <div className="mb-2 col-lg col-md-6 col-sm-12 ">
-                  <select
-                    className="  form-select"
-                    onChange={(e) => setFilterStatus(e.target.value)}
-                  >
-                    <option value="all">All Status</option>
-                    <option value="New">New</option>
-                    <option value="Contacted">Contacted</option>
-                    <option value="Qualified">Qualified</option>
-                    <option value="Proposal Sent">Proposal Sent</option>
-                    <option value="Closed">Closed</option>
-                  </select>
-                </div>
+                  <div className="mb-2 col-lg col-md-6 col-sm-12 ">
+                    <select
+                      className="  form-select"
+                      onChange={(e) => setSortByTimeToClose(e.target.value)}
+                    >
+                      <option value="">Sort by Time</option>
+                      <option value="latest">latest</option>
+                      <option value="oldest">oldest</option>
+                    </select>
+                  </div>
+                  <div className="mb-2 col-lg col-md-6 col-sm-12 ">
+                    <select
+                      className="  form-select"
+                      onChange={sortByPriorityHandler}
+                    >
+                      <option value="">Sort by Priority</option>
+                      <option value="lowToHigh">lowToHigh</option>
+                      <option value="highToLow">highToLow</option>
+                    </select>
+                  </div>
+                  <div className="mb-2 col-lg col-md-6 col-sm-12 ">
+                    <select
+                      className="  form-select"
+                      onChange={(e) => setFilterStatus(e.target.value)}
+                    >
+                      <option value="all">All Status</option>
+                      <option value="New">New</option>
+                      <option value="Contacted">Contacted</option>
+                      <option value="Qualified">Qualified</option>
+                      <option value="Proposal Sent">Proposal Sent</option>
+                      <option value="Closed">Closed</option>
+                    </select>
+                  </div>
                 </div>
               </section>
 
               {leadView === "list" && (
                 <section className="mb-4">
-                  <div className="row mb-2">
-                    <div className="col fw-medium ">Lead </div>
-                    <div className="col fw-medium ">Status</div>
-                    <div className="col fw-medium ">Sales agent </div>
-                  </div>
-                  {data &&
-                    data.length &&
-                    filteredLeads.map((lead) => (
-                      <div className="row mb-2">
-                        <div className="col">{lead.name}</div>
-                        <div className="col">
-                          <Link
-                            to={`/status?name=${lead.status}`}
-                            className="nav-link d-inline link-hover"
-                          >
-                            {lead.status}
-                          </Link>
-                        </div>
-                        <div className="col">{lead.salesAgent.name}</div>
+                  <ul className="list-group">
+                    <li className="list-group-item list-group-item-secondary">
+                      <div className="row  ">
+                        <h4 className="col fw-medium ">Lead </h4>
+                        <h4 className="col fw-medium ">Status</h4>
+                        <h4 className="col fw-medium ">Sales agent </h4>
                       </div>
-                    ))}
+                    </li>
+
+                    {data &&
+                      data.length &&
+                      filteredLeads.map((lead, index) => (
+                        <li
+                          className={`list-group-item ${
+                            (index + 1) % 2 === 0 && "bg-body-tertiary"
+                          }`}
+                        >
+                          <div className="row ">
+                            <div className="col">{lead.name}</div>
+                            <div className="col">
+                              <Link
+                                to={`/status?name=${lead.status}`}
+                                className="nav-link d-inline link-hover"
+                              >
+                                {lead.status}
+                              </Link>
+                            </div>
+                            <div className="col">{lead.salesAgent.name}</div>
+                          </div>
+                        </li>
+                      ))}
+                  </ul>
                 </section>
               )}
               {leadView === "card" && (
