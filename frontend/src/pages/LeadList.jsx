@@ -227,7 +227,8 @@ const LeadList = () => {
                     ].map((status) => (
                       <div className="col-sm-12 col-md-6 col-lg-3 mb-3">
                         <ul className="list-group">
-                          <li
+                          <Link
+                            to={`/status?name=${status}`}
                             className={`list-group-item list-group-item-action  list-group-item-${
                               status === "Closed" ? "danger" : "secondary"
                             }`}
@@ -242,7 +243,7 @@ const LeadList = () => {
                                 }
                               </span>
                             </div>
-                          </li>
+                          </Link>
                         </ul>
                         {data.length > 0 &&
                           filteredLeads
