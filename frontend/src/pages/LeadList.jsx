@@ -293,7 +293,45 @@ const LeadList = () => {
               {leadView === "card" && (
                 <section className="mb-4">
                   <div className="row ">
-                    <div className="col-sm-12 col-md-6 col-lg-3 mb-3">
+                    {[
+                      "New",
+                      "Contacted",
+                      "Qualified",
+                      "Proposal Sent",
+                      "Closed",
+                    ].map((status) => (
+                      <div className="col-sm-12 col-md-6 col-lg-3 mb-3">
+                        <ul className="list-group">
+                          <li
+                            className={`list-group-item list-group-item-action  list-group-item-${
+                              status === "Closed" ? "danger" : "secondary"
+                            }`}
+                          >
+                            <div className="d-flex justify-content-between">
+                              <span>{status}</span>
+                              <span>
+                                {
+                                  filteredLeads.filter(
+                                    (lead) => lead.status === status
+                                  ).length
+                                }
+                              </span>
+                            </div>
+                          </li>
+                        </ul>
+                        {data.length > 0 &&
+                          filteredLeads
+                            .filter((lead) => lead.status === status)
+                            .map((lead) => (
+                              <div className="card">
+                                <div className="card-body">
+                                  <div className="card-text">{lead.name}</div>
+                                </div>
+                              </div>
+                            ))}
+                      </div>
+                    ))}
+                    {/* <div className="col-sm-12 col-md-6 col-lg-3 mb-3">
                       <ul className="list-group">
                         <li className="list-group-item list-group-item-action  list-group-item-secondary">
                           <div className="d-flex justify-content-between">
@@ -422,7 +460,7 @@ const LeadList = () => {
                               </div>
                             </div>
                           ))}
-                    </div>
+                    </div> */}
                   </div>
                 </section>
               )}
