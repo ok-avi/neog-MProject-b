@@ -249,10 +249,11 @@ const LeadList = () => {
                           filteredLeads
                             .filter((lead) => lead.status === status)
                             .map((lead) => (
-                              <div className="card">
-                                <div className="card-body">
-                                  <div className="card-text">{lead.name}</div>
-                                </div>
+                              <div className=" card">
+                                <Link to={`/lead/${lead._id}`} className="nav-link card-body">
+                                  <h5 className="card-text">{lead.name}</h5>
+                                  <div className="card-text">{lead.salesAgent.name}</div>
+                                </Link>
                               </div>
                             ))}
                       </div>
