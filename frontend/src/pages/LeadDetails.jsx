@@ -90,24 +90,24 @@ const LeadDetails = () => {
   const [comments, setComments] = useState();
   const [newComment, setNewComment] = useState("");
   const { id } = useParams();
-  const leadId = "682aea83991fbf98d2868884";
+  // const leadId = "682aea83991fbf98d2868884";
   const { data, loading, error } = useFetch(
     `https://neog-m-project-b-backend.vercel.app/api/v1/leads/${id}`
   );
   //   console.log(data && data, "data");
   // console.log(lead, "data");
-  getComments(leadId, setComments);
+  getComments(id, setComments);
   function updateLeadHandler() {
     console.log("lead name", lead.name);
     setDisable((prev) => !prev);
     if (!disable) {
       console.log("Disable false", disable);
-      console.log(updateLead(lead, data, leadId));
+      console.log(updateLead(lead, data, id));
     }
   }
   function submitFormHandler(e) {
     e.preventDefault();
-    createNewComment(leadId, newComment);
+    createNewComment(id, newComment);
   }
   return (
     <>
