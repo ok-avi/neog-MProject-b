@@ -84,65 +84,21 @@ const Dashboard = () => {
             <h2>Lead Status</h2>
 
             <div className="row">
-              <div className="col-lg-4 col-sm-6 mb-3">
-                <div className="card">
-                  <div className="card-body">
-                    <h5 className="card-title">New</h5>
-                    <div className="display-3 fw-normal">
-                      {data.filter((lead) => lead.status === "New").length}
+              {["New", "Contacted", "Qualified", "Proposal Sent", "Closed"].map(
+                (status) => (
+                  <div className="col-lg-4 col-sm-6 mb-3">
+                    <div className="card">
+                      <div className="card-body">
+                        <h5 className="card-title">{status}</h5>
+                        <div className="display-3 fw-normal">
+                          {data.filter((lead) => lead.status === status).length}
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
-              <div className="col-lg-4 col-sm-6 mb-3">
-                <div className="card">
-                  <div className="card-body">
-                    <h5 className="card-title">Contacted</h5>
-                    <div className="display-3 fw-normal">
-                      {
-                        data.filter((lead) => lead.status === "Contacted")
-                          .length
-                      }
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-4 col-sm-6 mb-3">
-                <div className="card">
-                  <div className="card-body">
-                    <h5 className="card-title">Qualified</h5>
-                    <div className="display-3 fw-normal">
-                      {
-                        data.filter((lead) => lead.status === "Qualified")
-                          .length
-                      }
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-4 col-sm-6 mb-3">
-                <div className="card">
-                  <div className="card-body">
-                    <h5 className="card-title">Proposal Sent</h5>
-                    <div className="display-3 fw-normal">
-                      {
-                        data.filter((lead) => lead.status === "Proposal Sent")
-                          .length
-                      }
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-4 col-sm-6 mb-3">
-                <div className="card">
-                  <div className="card-body">
-                    <h5 className="card-title">Closed</h5>
-                    <div className="display-3 fw-normal">
-                      {data.filter((lead) => lead.status === "Closed").length}
-                    </div>
-                  </div>
-                </div>
-              </div>
+                )
+              )}
+              
             </div>
           </section>
         </>
