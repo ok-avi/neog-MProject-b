@@ -127,7 +127,7 @@ const Status = () => {
                         }))
                       }
                     >
-                      <option value="" hidden>
+                      <option value="" >
                         Select Priority
                       </option>
                       {uniquePriority(data).map((lead) => (
