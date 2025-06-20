@@ -88,12 +88,12 @@ const Dashboard = () => {
                 (status) => (
                   <div className="col-lg-4 col-sm-6 mb-3">
                     <div className="card">
-                      <div className="card-body">
+                      <Link to={`/status?name=${status}`} className="nav-link card-body">
                         <h5 className="card-title">{status}</h5>
                         <div className="display-3 fw-normal">
                           {data.filter((lead) => lead.status === status).length}
                         </div>
-                      </div>
+                      </Link>
                     </div>
                   </div>
                 )
