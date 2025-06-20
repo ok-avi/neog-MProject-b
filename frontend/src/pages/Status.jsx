@@ -73,24 +73,28 @@ const Status = () => {
                 <div>Status: {data && data[0].status}</div>
               </section>
               <section className="mb-3">
-                <div className="row mb-2">
-                  <div className="col">
-                    <span className="border-bottom border-2">Lead</span>
-                  </div>
-                  <div className="col">
-                    <span className="border-bottom border-2">Sales Agent</span>
-                  </div>
-                  <div className="col">
-                    <span className="border-bottom border-2">Priority</span>
-                  </div>
-                </div>
-                {filteredLead.map((lead) => (
-                  <div className="row">
-                    <div className="col">{lead.name}</div>
-                    <div className="col">{lead.salesAgent.name}</div>
-                    <div className="col">{lead.priority}</div>
-                  </div>
-                ))}
+                <ul className="list-group">
+                  <li className="list-group-item list-group-item-secondary">
+                    <div className="row">
+                      <div className="col fw-medium">lead</div>
+                      <div className="col fw-medium">Sales Agent</div>
+                      <div className="col fw-medium">Priority</div>
+                    </div>
+                  </li>
+                  {filteredLead.map((lead, index) => (
+                    <li
+                      className={`list-group-item ${
+                        (index + 1) % 2 === 0 && "bg-body-tertiary"
+                      }`}
+                    >
+                      <div className="row">
+                        <div className="col">{lead.name}</div>
+                        <div className="col">{lead.salesAgent.name}</div>
+                        <div className="col">{lead.priority}</div>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
               </section>
               <section className="mb-3">
                 <div className="row mb-4">
