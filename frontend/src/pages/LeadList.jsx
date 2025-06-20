@@ -23,7 +23,7 @@ const LeadList = () => {
 
   let filteredLeads;
   if (data) {
-    filteredLeads = data;
+    filteredLeads = [...data];
 
     // useEffect(()=>{
 
@@ -35,36 +35,28 @@ const LeadList = () => {
     }
 
     const priorityOrder = { Low: 1, Medium: 2, High: 3 };
-    const array = [{ value: "High" }, { value: "Low" }, { value: "Medium" }];
+    const array = [
+      { priority: "High" },
+      { priority: "Low" },
+      { priority: "Medium" },
+    ];
 
     if (sortByPriority === "lowToHigh") {
-      filteredLeads.sort(
+      filteredLeads = [...data].sort(
         (a, b) => priorityOrder[a.priority] - priorityOrder[b.priority]
       );
-      array.sort((a, b) => priorityOrder[a.value] - priorityOrder[b.value]);
-      console.log(array, filteredLeads);
     } else if (sortByPriority === "highToLow") {
-      // console.log(filteredLeads,"highToLow 1",sortByPriority)
-      // filteredLeads = [
-      //   ...filteredLeads.filter(lead=>lead.priority==="High"),
-      //   ...filteredLeads.filter(lead=>lead.priority==="Medium"),
-      //   ...filteredLeads.filter(lead=>lead.priority==="Low"),
-      //   ]
-      /*
-       */
-      // filteredLeads=filteredLeads.sort((a, b) => priorityOrder[b.priority] - priorityOrder[a.priority]);
-      // console.log(filteredLeads,"highToLow",sortByPriority)
+      filteredLeads = [...data].sort(
+        (a, b) => priorityOrder[b.priority] - priorityOrder[a.priority]
+      );
     }
 
     if (sortByTimeToClose === "latest") {
-      filteredLeads = filteredLeads.sort(
-        (a, b) => a.timeToClose - b.timeToClose
-      );
-    } else {
-      filteredLeads = filteredLeads
+      filteredLeads = [...data].sort((a, b) => a.timeToClose - b.timeToClose);
+    } else if (sortByTimeToClose === "oldest") {
+      filteredLeads = [...data]
         .sort((a, b) => a.timeToClose - b.timeToClose)
         .reverse();
-      // console.log(filteredLeads)
     }
   }
 
@@ -257,7 +249,6 @@ const LeadList = () => {
                             ))}
                       </div>
                     ))}
-                    
                   </div>
                 </section>
               )}
