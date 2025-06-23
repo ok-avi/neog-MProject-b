@@ -8,11 +8,11 @@ const App = () => {
       <div className="row " style={{height:"100vh",width:"100vw"}}>
         <section
           style={{height:"100%"}}
-          className=" col-4 col-lg-3   border-end  border d-flex  h-100 "
+          className="col-2 col-md-1      d-flex  h-100 "
         >
             <Sidebar />
         </section>
-        <section className="col-8 col-lg-9 p-0  h-100" style={{overflowY:"scroll"}}>
+        <section className="col p-0  h-100" style={{overflowY:"scroll"}}>
             <Outlet />
         </section>
       </div>

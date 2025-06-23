@@ -270,7 +270,7 @@ const LeadList = () => {
               <section className="my-5"></section>
             </>
           ):(
-            <div>error {data && data.error}</div>
+            <div> {data && data.error}</div>
           )}
         </section>
       </main>
