@@ -26,7 +26,7 @@ const LeadList = () => {
   // console.log(data&&data)
 
   let filteredLeads;
-  if (data) {
+  if (data && typeof data==="object" && Array.isArray(data)) {
     filteredLeads = [...data];
 
     // useEffect(()=>{
@@ -90,10 +90,10 @@ const LeadList = () => {
               <Loading />
             </div>
           )}
-          {data && (
+          {data && typeof data ==="object" && Array.isArray(data) ? (
             <>
               <section className="mb-3 row">
-                <h2 className=" col">Overview {sortByPriority}{sortByTimeToClose}</h2>
+                <h2 className=" col">Overview </h2>
                 <div className="col-auto">
                   <Link
                     to="/lead/form"
@@ -269,6 +269,8 @@ const LeadList = () => {
 
               <section className="my-5"></section>
             </>
+          ):(
+            <div>error {data && data.error}</div>
           )}
         </section>
       </main>
