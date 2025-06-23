@@ -94,8 +94,11 @@ const LeadDetails = () => {
   const { data, loading, error } = useFetch(
     `https://neog-m-project-b-backend.vercel.app/api/v1/leads/${id}`
   );
+  // const { data, loading, error } = useFetch(
+  //   `http://localhost:3000/api/v1/leads/${id}`
+  // );
   //   console.log(data && data, "data");
-  // console.log(lead, "data");
+  console.log(data&&data, "data");
   getComments(id, setComments);
   function updateLeadHandler() {
     console.log("lead name", lead.name);
@@ -124,14 +127,14 @@ const LeadDetails = () => {
       <main className="row ">
         <section className=" py-4 px-5">
           {loading && <Loading />}
-          {data && (
+          {data && typeof data === 'object' && !Array.isArray(data) && (
             <>
               <section className="mb-3">
                 <h2 className="text-center">Lead Details</h2>
               </section>
               <section className="mb-3 row mx-0">
                 <ul className="list-group col-lg-6 col-md-12">
-                  <li className="list-group-item">
+                  <li className="list-group-item  bg-body-secondary">
                     <div className="row">
                       <div className="col-6 col-lg-4 d-flex align-items-center">
                         <span>Lead Name:</span>
@@ -142,7 +145,7 @@ const LeadDetails = () => {
                           className={` m-0  form-control  ${
                             disable
                               ? "bg-transparent border-0"
-                              : " bg-secondary-subtle"
+                              : " bg-white"
                           } `}
                           type="text"
                           name="status"
@@ -171,7 +174,7 @@ const LeadDetails = () => {
                           className={` m-0  form-control  ${
                             disable
                               ? "bg-transparent border-0"
-                              : " bg-secondary-subtle"
+                              : " bg-white border border-1 border-secondary-subtle"
                           } `}
                           type="text"
                           name="status"
@@ -187,7 +190,7 @@ const LeadDetails = () => {
                       </div>
                     </div>
                   </li>
-                  <li className="list-group-item">
+                  <li className="list-group-item bg-body-secondary">
                     <div className="row">
                       <div className="col-6 col-lg-4 d-flex align-items-center">
                         <span>Lead Source:</span>
@@ -200,7 +203,7 @@ const LeadDetails = () => {
                           className={` m-0  form-control  ${
                             disable
                               ? "bg-transparent border-0"
-                              : " bg-secondary-subtle"
+                              : " bg-white"
                           } `}
                           onChange={(e) =>
                             setLead((prev) => ({
@@ -237,7 +240,7 @@ const LeadDetails = () => {
                           className={` m-0  form-control  ${
                             disable
                               ? "bg-transparent border-0"
-                              : " bg-secondary-subtle"
+                              : " bg-white border border-1 border-secondary-subtle"
                           } `}
                           onChange={(e) =>
                             setLead((prev) => ({
@@ -260,7 +263,7 @@ const LeadDetails = () => {
                       </div>
                     </div>
                   </li>
-                  <li className="list-group-item">
+                  <li className="list-group-item bg-body-secondary">
                     <div className="row">
                       <div className="col-6 col-lg-4 d-flex align-items-center">
                         <span>Priority:</span>
@@ -273,7 +276,7 @@ const LeadDetails = () => {
                           className={` m-0  form-control  ${
                             disable
                               ? "bg-transparent border-0"
-                              : " bg-secondary-subtle"
+                              : " bg-white"
                           } `}
                           onChange={(e) =>
                             setLead((prev) => ({
@@ -307,7 +310,7 @@ const LeadDetails = () => {
                           className={` m-0  form-control  ${
                             disable
                               ? "bg-transparent border-0"
-                              : " bg-secondary-subtle"
+                              : " bg-white border border-1 border-secondary-subtle"
                           } `}
                           type="number"
                           name="timeToClose"
