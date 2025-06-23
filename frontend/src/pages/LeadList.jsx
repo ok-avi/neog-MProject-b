@@ -20,10 +20,14 @@ const LeadList = () => {
   const { data, loading, error } = useFetch(
     "https://neog-m-project-b-backend.vercel.app/api/v1/leads"
   );
+  // const { data, loading, error } = useFetch(
+  //   "http://localhost:3000/api/v1/leads"
+  // );
+  // console.log(data&&data)
 
   let filteredLeads;
   if (data) {
-    filteredLeads = data;
+    filteredLeads = [...data];
 
     // useEffect(()=>{
 
@@ -37,31 +41,23 @@ const LeadList = () => {
     const priorityOrder = { Low: 1, Medium: 2, High: 3 };
     const array = [{ value: "High" }, { value: "Low" }, { value: "Medium" }];
 
+    
     if (sortByPriority === "lowToHigh") {
-      filteredLeads.sort(
+      filteredLeads = [...filteredLeads].sort(
         (a, b) => priorityOrder[a.priority] - priorityOrder[b.priority]
       );
-      array.sort((a, b) => priorityOrder[a.value] - priorityOrder[b.value]);
-      console.log(array, filteredLeads);
     } else if (sortByPriority === "highToLow") {
-      // console.log(filteredLeads,"highToLow 1",sortByPriority)
-      // filteredLeads = [
-      //   ...filteredLeads.filter(lead=>lead.priority==="High"),
-      //   ...filteredLeads.filter(lead=>lead.priority==="Medium"),
-      //   ...filteredLeads.filter(lead=>lead.priority==="Low"),
-      //   ]
-      /*
-       */
-      // filteredLeads=filteredLeads.sort((a, b) => priorityOrder[b.priority] - priorityOrder[a.priority]);
-      // console.log(filteredLeads,"highToLow",sortByPriority)
+      filteredLeads = [...filteredLeads].sort(
+        (a, b) => priorityOrder[b.priority] - priorityOrder[a.priority]
+      );
     }
 
     if (sortByTimeToClose === "latest") {
-      filteredLeads = filteredLeads.sort(
+      filteredLeads = [...filteredLeads].sort(
         (a, b) => a.timeToClose - b.timeToClose
       );
-    } else {
-      filteredLeads = filteredLeads
+    } else if (sortByTimeToClose === "oldest") {
+      filteredLeads = [...filteredLeads]
         .sort((a, b) => a.timeToClose - b.timeToClose)
         .reverse();
       // console.log(filteredLeads)
@@ -70,12 +66,14 @@ const LeadList = () => {
 
   function sortByPriorityHandler(e) {
     const { value, checked } = e.target;
+    setSortByTimeToClose();
     setSortByPriority(value);
     // console.log(value,checked)
     // console.log(filteredLeads)
   }
   function sortByTimeToCloseHandler(e) {
     const { value, checked } = e.target;
+    setSortByPriority();
     setSortByTimeToClose(value);
   }
   // console.log(loading && loading);
@@ -95,13 +93,13 @@ const LeadList = () => {
           {data && (
             <>
               <section className="mb-3 row">
-                <h2 className=" col">Overview</h2>
+                <h2 className=" col">Overview {sortByPriority}{sortByTimeToClose}</h2>
                 <div className="col-auto">
                   <Link
                     to="/lead/form"
                     className="btn btn-outline-danger px-4 "
                   >
-                    Create lead
+                    Create lead 
                   </Link>
                 </div>
               </section>
@@ -146,7 +144,7 @@ const LeadList = () => {
                   <div className="mb-2 col-lg col-md-6 col-sm-12 ">
                     <select
                       className="  form-select"
-                      onChange={(e) => setSortByTimeToClose(e.target.value)}
+                      onChange={sortByTimeToCloseHandler}
                     >
                       <option value="">Sort by Time</option>
                       <option value="latest">latest</option>
