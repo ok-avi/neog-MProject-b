@@ -3,7 +3,9 @@ import Sidebar from "../components/Sidebar";
 import useFetch from "../useFetch";
 
 function postFormData(leadForm, setAlertMsg) {
-  fetch("https://neog-m-project-b-backend.vercel.app/api/v1/leads", {
+  const localServer = "http://localhost:3000"
+  const liveServer = "https://neog-m-project-b-backend.vercel.app"
+  fetch(`${liveServer}/api/v1/leads`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -20,10 +22,14 @@ function postFormData(leadForm, setAlertMsg) {
   })
     .then((res) => res.json())
     .then((data) => {
-      setAlertMsg(true);
-      setTimeout(() => {
-        setAlertMsg(false);
-      }, 3000);
+      if(!data.error){
+        setAlertMsg(true);
+        setTimeout(() => {
+          setAlertMsg(false);
+        }, 3000);
+
+      }
+      // console.log(data,data.hasOwnProperty("error"))
     })
     .catch((error) => console.error(error));
 }
@@ -42,6 +48,8 @@ const LeadForm = () => {
     tags: [],
   });
   const { data, loading, error } = useFetch("https://neog-m-project-b-backend.vercel.app/api/v1/agents");
+  // const { data, loading, error } = useFetch("http://localhost:3000/api/v1/agents");
+  // console.log(data)
   function tagHandler(e) {
     const { value } = e.target;
     // setTags((prev) => {
@@ -115,7 +123,8 @@ const LeadForm = () => {
                     }))
                   }
                 >
-                  <option value="Website" selected>
+                  <option value="">Select Source</option>
+                  <option value="Website" >
                     Website
                   </option>
                   <option value="Referral">Referral</option>
@@ -131,6 +140,7 @@ const LeadForm = () => {
                 </label>
                 <select
                   className="col form-control"
+                  required
                   onChange={(e) =>
                     setLeadForm((prev) => ({
                       ...prev,
@@ -140,8 +150,9 @@ const LeadForm = () => {
                     }))
                   }
                 >
+                  <option value="" data-id="">Select agent</option>
                   {data &&
-                    data.map((agent) => (
+                    data.map((agent,index) => (
                       <option
                         value={agent.name}
                         data-id={agent._id}
@@ -159,7 +170,7 @@ const LeadForm = () => {
                 <select
                   className="col form-control"
                   id="status"
-                  defaultValue={"New"}
+                  // defaultValue={"New"}
                   required
                   onChange={(e) =>
                     setLeadForm((prev) => ({
@@ -168,6 +179,7 @@ const LeadForm = () => {
                     }))
                   }
                 >
+                  <option value="">Select Status</option>
                   <option value="New">New</option>
                   <option value="Contacted">Contacted</option>
                   <option value="Qualified">Qualified</option>
@@ -182,7 +194,6 @@ const LeadForm = () => {
                 <select
                   className="col form-control"
                   id="priority"
-                  defaultValue={"High"}
                   required
                   onChange={(e) =>
                     setLeadForm((prev) => ({
@@ -191,6 +202,7 @@ const LeadForm = () => {
                     }))
                   }
                 >
+                  <option value="">Select priority</option>
                   <option value="High">High</option>
                   <option value="Medium">Medium</option>
                   <option value="Low">Low</option>
