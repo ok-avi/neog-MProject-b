@@ -56,18 +56,18 @@ const SalesAgent = () => {
                 <section className="mb-3">
                   
                   <ul className="list-group">
-                    <li className="list-group-item list-group-item-secondary">
+                    <li className="list-group-item bg-dark text-white">
                       <div className="row mb-2">
-                        <div className="col  fw-medium">Lead</div>
-                        <div className="col  fw-medium">Status</div>
-                        <div className="col  fw-medium">Priority</div>
+                        <h4 className="col  fw-medium">Lead</h4>
+                        <h4 className="col  fw-medium">Status</h4>
+                        <h4 className="col  fw-medium">Priority</h4>
                       </div>
                     </li>
                     {data &&
                       sortedLeads.map((lead, index) => (
                         <li
                           className={`list-group-item ${
-                            (index + 1) % 2 === 0 && "bg-body-tertiary"
+                            (index + 1) % 2 === 0 && "bg-body-secondary"
                           }`}
                         >
                           <div className="row mb-1">
