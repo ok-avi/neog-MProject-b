@@ -182,7 +182,7 @@ const LeadList = () => {
               {leadView === "list" && (
                 <section className="mb-4">
                   <ul className="list-group">
-                    <li className="list-group-item list-group-item-secondary">
+                    <li className="list-group-item  bg-dark text-white">
                       <div className="row  ">
                         <h4 className="col fw-medium ">Lead </h4>
                         <h4 className="col fw-medium ">Status</h4>
@@ -195,7 +195,7 @@ const LeadList = () => {
                       filteredLeads.map((lead, index) => (
                         <li
                           className={`list-group-item ${
-                            (index + 1) % 2 === 0 && "bg-body-tertiary"
+                            (index + 1) % 2 === 0 && "bg-body-secondary"
                           }`}
                         >
                           <div className="row ">
@@ -225,40 +225,46 @@ const LeadList = () => {
                       "Proposal Sent",
                       "Closed",
                     ].map((status) => (
-                      <div className="col-sm-12 col-md-6 col-lg-3 mb-3">
-                        <ul className="list-group">
+                      <div className="col-sm-12 col-md-6 col-lg-4 mb-4 ">
+                        <ul className="list-group h-100">
                           <Link
                             to={`/status?name=${status}`}
-                            className={`list-group-item list-group-item-action  list-group-item-${
-                              status === "Closed" ? "danger" : "secondary"
+                            className={`list-group-item list-group-item-action text-light list-group-item bg-${
+                              status === "Closed" ? "danger" : "dark"
                             }`}
                           >
                             <div className="d-flex justify-content-between">
-                              <span>{status}</span>
-                              <span>
+                              <h5>{status}</h5>
+                              <h5>
                                 {
                                   filteredLeads.filter(
                                     (lead) => lead.status === status
                                   ).length
                                 }
-                              </span>
+                              </h5>
                             </div>
                           </Link>
+                          <li className="list-group-item bg-body-secondary h-100">
+                            {data.length > 0 &&
+                              filteredLeads
+                                .filter((lead) => lead.status === status)
+                                .map((lead) => (
+                                  <div className=" card ">
+                                    <Link
+                                      to={`/lead/${lead._id}`}
+                                      className="nav-link card-body"
+                                    >
+                                      <h5 className="card-text">{lead.name}</h5>
+                                      <div className="card-text">
+                                        {lead.salesAgent.name}
+                                      </div>
+                                    </Link>
+                                  </div>
+                                ))}
+                          </li>
                         </ul>
-                        {data.length > 0 &&
-                          filteredLeads
-                            .filter((lead) => lead.status === status)
-                            .map((lead) => (
-                              <div className=" card">
-                                <Link to={`/lead/${lead._id}`} className="nav-link card-body">
-                                  <h5 className="card-text">{lead.name}</h5>
-                                  <div className="card-text">{lead.salesAgent.name}</div>
-                                </Link>
-                              </div>
-                            ))}
                       </div>
                     ))}
-                    
                   </div>
                 </section>
               )}
