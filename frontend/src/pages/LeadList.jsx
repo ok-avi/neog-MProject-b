@@ -147,7 +147,7 @@ const LeadList = () => {
                       onChange={sortByTimeToCloseHandler}
                     >
                       <option value="">Sort by Time</option>
-                      <option value="latest">latest</option>
+                      <option value="latest">Latest</option>
                       <option value="oldest">oldest</option>
                     </select>
                   </div>
@@ -157,8 +157,8 @@ const LeadList = () => {
                       onChange={sortByPriorityHandler}
                     >
                       <option value="">Sort by Priority</option>
-                      <option value="lowToHigh">lowToHigh</option>
-                      <option value="highToLow">highToLow</option>
+                      <option value="lowToHigh">Low to High</option>
+                      <option value="highToLow">High to Low</option>
                     </select>
                   </div>
                   <div className="mb-2 col-lg col-md-6 col-sm-12 ">
