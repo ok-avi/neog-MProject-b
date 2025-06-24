@@ -18,7 +18,7 @@ const Dashboard = () => {
       {data && data.length > 0 && (
         <>
           <header className="border-bottom border-3 text-center py-3">
-            <h1>Anvaya CRM Dashboard</h1>
+            <h1>Deal Bandhan CRM Dashboard</h1>
           </header>
           <section className="py-3 px-4">
             <div className="mt-3 row  justify-content-md-between">

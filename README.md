@@ -1,4 +1,4 @@
-# CRM
+# Deal Bandhan
 
 A full-stack Customer Relationship Management app where you can manage your whole sales team, and leads.
 Built with a React frontend, Express/Node backend, MongoDB database.
